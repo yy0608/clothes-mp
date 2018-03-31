@@ -1,0 +1,8 @@
+<block wx:if="{{false}}" wx:for="{{uploadData}}" wx:key="{{index}}">
+  <view wx:if="{{item.type === 1}}" class="text-item">
+    <textarea auto-height value="{{item.value}}" />
+  </view>
+  <view wx:if="{{item.type === 2}}" class="image-item">
+    <image src="{{item.value}}"></image>
+  </view>
+</block>
