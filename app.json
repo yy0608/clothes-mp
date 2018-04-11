@@ -1,13 +1,31 @@
 {
   "pages":[
+    "pages/topics/index/index",
+    "pages/topics/detail/detail",
+    "pages/shops/index/index",
+    "pages/mine/index/index",
     "pages/test/multi-upload",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/index/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "服饰",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/shops/index/index",
+      "text": "店铺"
+    }, {
+      "pagePath": "pages/topics/index/index",
+      "text": "帖子"
+    }, {
+      "pagePath": "pages/mine/index/index",
+      "text": "我的"
+    }],
+    "color": "#888",
+    "selectedColor": "blue",
+    "backgroundColor": "#fff"
   }
 }

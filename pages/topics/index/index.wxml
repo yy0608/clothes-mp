@@ -1,0 +1,26 @@
+<wxs module="m1">
+var utils = require('../../../utils.wxs')
+
+module.exports = {
+  substringContent: utils.substringContent,
+  getDateDis: utils.getDateDis
+}
+</wxs>
+
+<view class="topic-list">
+  <view wx:for="{{topicList}}" class="topic-item" wx:key="{{index}}" bindtap="goDetail" data-id="{{item._id}}">
+    <view class="title">{{item.title}}</view>
+    <view class="publish-info">
+      <view class="author">{{item.author_id.name}}</view>
+      <view class="time">{{m1.getDateDis(item.createdAt)}}</view>
+    </view>
+    <view class="content">
+      <block wx:for="{{item.content}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}">
+        <text wx:if="{{item2.type === 1}}">{{m1.substringContent(item2.value)}}</text>
+        <text wx:if="{{item2.type === 2}}">
+        <block wx:for="{{item2.value}}" wx:for-index="index3" wx:for-item="item3" wx:key="{{index3}}">[图片]</block>
+      </text>
+      </block>
+    </view>
+  </view>
+</view>

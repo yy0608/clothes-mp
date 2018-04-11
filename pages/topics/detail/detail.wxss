@@ -1,0 +1,17 @@
+.topic-detail {
+  padding: 30rpx 20rpx;
+}
+.title {
+  font-size: 36rpx;
+  margin-bottom: 30rpx;
+}
+.content-item {
+  text-align: justify;
+  line-height: 50rpx;
+  color: #666;
+}
+.content-item image {
+  width: 100%;
+  display: block;
+  margin: 20rpx auto;
+}

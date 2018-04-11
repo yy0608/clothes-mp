@@ -1,0 +1,11 @@
+<view class="topic-detail">
+  <view class="title tc">{{topicDetail.title}}</view>
+  <view class="content-item" wx:for="{{topicDetail.content}}" wx:key="{{index}}">
+    <block wx:if="{{item.type === 1}}">{{item.value}}</block>
+    <block wx:if="{{item.type === 2}}">
+      <block wx:for="{{item.value}}" wx:for-index="index2" wx:for-item="item2" wx:key="{{index2}}">
+        <image src="{{imgOrigin + item2 + '?imageView2/3/w/750/h/750'}}" mode="widthFix"></image>
+      </block>
+    </block>
+  </view>
+</view>
