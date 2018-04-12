@@ -1,1 +1,116 @@
-/* pages/shops/index/index.wxss */
+page {
+  padding-top: 5vh;
+}
+.before-location {
+  display: flex;
+  height: 100vh;
+  padding: 0 50rpx;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.button-item {
+  margin-top: 50rpx;
+}
+.head-section {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 5vh;
+  line-height: 5vh;
+  display: flex;
+  align-items: center;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.head-section .address {
+  margin-left: 10rpx;
+}
+.address-cont {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+.change-cont {
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  height: 100%;
+}
+.way-change {
+  width: 40rpx;
+  height: 40rpx;
+}
+.reload {
+  width: 28rpx;
+  height: 28rpx;
+}
+map {
+  width: 100%;
+  height: 95vh;
+}
+
+.toggery-container .text-cont .title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.price-cont {
+  display: flex;
+  align-items: baseline;
+  font-size: 22rpx;
+  color: #888;
+}
+.toggery-container .text-cont .price {
+  margin-right: 10rpx;
+  font-size: 32rpx;
+  color: #DD2727;
+}
+.toggery-container {
+  padding-left: 30rpx;
+}
+.toggery-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 30rpx 30rpx 0;
+  border-bottom: 1rpx solid #e0e0e0;
+}
+.toggery-item:last-child {
+  margin-bottom: 0;
+}
+.logo-cont {
+  width: 200rpx;
+  height: 200rpx;
+  flex-shrink: 0;
+}
+.logo-cont .logo {
+  width: 100%;
+  height: 100%;
+}
+.toggery-container .text-cont {
+  flex-grow: 1;
+  margin-left: 30rpx;
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.toggery-container .text-cont .name {
+  font-size: 32rpx;
+}
+.toggery-container .text-cont .desc {
+  color: #666;
+  font-size: 30rpx;
+  overflow: hidden;
+  line-height: 1.6;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.toggery-container .text-cont .address {
+  color: #888;
+}
+

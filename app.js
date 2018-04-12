@@ -1,39 +1,50 @@
-//app.js
 App({
-  onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
-      }
-    })
-  },
   globalData: {
-    userInfo: null
+    qqMapKey: '2Y4BZ-JU7KO-INAWM-SYJWI-6ZR22-K3BWU',
+    toastData: {},
+    timer: null
+  },
+
+  showToast(params) { // type: 'default', 'success', 'info', 'tip', 'error'
+    let pages = getCurrentPages()
+    let curPage = pages[pages.length - 1]
+    let defaultParams = {
+      text: '(请传入text)',
+      duration: 2500,
+      type: 'default'
+    }
+    let resolveParams = Object.assign(defaultParams, params)
+    this.globalData.toastData = {
+      text: resolveParams.text,
+      type: resolveParams.type
+    }
+    if (this.globalData.timer) {
+      clearTimeout(this.globalData.timer)
+      this.globalData.timer = null
+      this.globalData.toastData.show = false
+      curPage.setData({
+        toastData: this.globalData.toastData
+      })
+      setTimeout(() => {
+        this.showToastHide(curPage, resolveParams.duration)
+      }, 300)
+    } else {
+      this.showToastHide(curPage, resolveParams.duration)
+    }
+  },
+
+  showToastHide(curPage, duration) {
+    this.globalData.toastData.show = true
+    curPage.setData({
+      toastData: this.globalData.toastData
+    })
+    this.globalData.timer = setTimeout(() => { // 隐藏
+      this.globalData.toastData.show = false
+      curPage.setData({
+        toastData: this.globalData.toastData
+      })
+      clearTimeout(this.globalData.timer)
+      this.globalData.timer = null
+    }, duration)
   }
 })

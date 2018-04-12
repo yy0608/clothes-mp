@@ -37,7 +37,13 @@ var getDateDis = function (dateTime, isTimeStamp) {
   return result;
 }
 
+var changeQiniuUrl = function (url, imgOrigin, qiniuQuery) {
+  var reg = getRegExp('(http:\/\/)|(https:\/\/)')
+  return reg.test(url) ? url : imgOrigin + url + qiniuQuery
+}
+
 module.exports = {
   substringContent: substringContent,
-  getDateDis: getDateDis
+  getDateDis: getDateDis,
+  changeQiniuUrl: changeQiniuUrl
 }

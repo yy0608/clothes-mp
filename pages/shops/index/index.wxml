@@ -1,2 +1,51 @@
-<!--pages/shops/index/index.wxml-->
-<text>pages/shops/index/index.wxml</text>
+<!-- <import src="/templates/toast.wxml" />
+<template is="toast" data="{{...toastData}}" /> -->
+
+<wxs module="m2">
+var utils = require('../../../utils.wxs')
+
+module.exports = {
+  changeQiniuUrl: utils.changeQiniuUrl
+}
+</wxs>
+
+<view wx:if="{{locationStatus !== 1}}" class="before-location">
+  {{locationStatus}}
+  <view wx:if="{{!locationStatus}}" class="text">获取附近宝贝信息</view>
+  <view wx:if="{{locationStatus === 2}}" class="text">手机未开启gps，开启后获取地址</view>
+  <view wx:if="{{locationStatus === 3}}" class="text">打开地理位置</view>
+  <view class="button-item">
+    <button wx:if="{{!locationStatus}}" type="primary" bindtap="getLocation">允许授权</button>
+    <button wx:if="{{locationStatus === 2}}" type="primary" bindtap="getLocation">获取地址</button>
+    <button wx:if="{{locationStatus === 3}}" type="primary" bindtap="openSetting">打开设置</button>
+  </view>
+  <!-- <view class="button-item">
+    <button>先逛逛</button>
+  </view> -->
+</view>
+<block wx:else>
+<!-- <view class="head-section">
+  <view class="address-cont" bindtap="getLocation">
+    <image class="reload" src="/assets/icons/reload.png"></image>
+    <text class="address">{{address}}</text>
+  </view>
+  <view class="change-cont" bindtap="changeWay">
+    <image wx:if="{{!showMapFlag}}" class="way-change" src="/assets/icons/map.png"></image>
+    <image wx:else class="way-change" src="/assets/icons/list.png"></image>
+  </view>
+</view> -->
+<view class="toggery-container">
+  <view wx:for="{{toggeryData}}" wx:key="{{index}}" data-id="{{item.id}}" data-name="{{item.name}}" data-address="{{item.address}}" data-latitude="{{item.latitude}}" data-longitude="{{item.longitude}}" class="toggery-item" bindtap="goToggery">
+    <view class="logo-cont">
+      <image src="{{m2.changeQiniuUrl(item.logo, imgOrigin, qiniuQuery)}}" mode="aspectFit" class="logo"></image>
+    </view>
+    <view class="text-cont">
+      <view class="name">{{item.name}}</view>
+      <view class="desc">{{item.desc}}</view>
+      <view class="address">000m</view>
+      <view>{{item.merchant_id.name}}</view>
+    </view>
+  </view>
+</view>
+<map wx:if="{{showMapFlag}}" id="map" scale="15" show-location="{{true}}" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" bindmarkertap="goToggery" bindcallouttap="goToggery"></map>
+</block>

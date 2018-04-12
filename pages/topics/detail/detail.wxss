@@ -15,3 +15,19 @@
   display: block;
   margin: 20rpx auto;
 }
+.handle-bar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+  height: 100rpx;
+  border-top: 1rpx solid #e0e0e0;
+}
+.handle-item {
+  width: 33.33%;
+  text-align: center;
+}

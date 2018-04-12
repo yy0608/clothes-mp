@@ -1,0 +1,3 @@
+<template name="toast">
+  <view class="toast-container {{type}} {{show ? '' : 'hide'}}">{{text}}</view>
+</template>
