@@ -30,11 +30,11 @@
   <form bindsubmit="signinSubmit" wx:if="{{curSign === 'signin'}}" class="sign-cont-item signin-cont">
     <label class="cont-item">
       <text>手机号：</text>
-      <input name="phone" type="number"></input>
+      <input name="username" type="number"></input>
     </label>
     <label class="cont-item">
       <text>密码：</text>
-      <input name="password"></input>
+      <input name="password" type="password"></input>
     </label>
     <view class="cont-item">
       <button formType="submit">登录</button>

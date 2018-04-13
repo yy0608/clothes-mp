@@ -11,7 +11,7 @@
 </view>
 
 <view class="handle-bar">
-  <view class="handle-item">点赞（999+）</view>
+  <view class="handle-item" bindtap="like">点赞（999+）</view>
   <view class="handle-item">收藏</view>
-  <view class="handle-item">评论（999+）</view>
+  <view class="handle-item" bindtap="comment">评论（999+）</view>
 </view>

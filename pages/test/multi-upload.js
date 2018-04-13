@@ -35,6 +35,11 @@ Page({
     ]
   },
   onLoad () {
+    wx.getUserInfo({
+      success: res => {
+        console.log(res)
+      }
+    })
     console.log(origin)
     wx.request({
       // url: origin + '/employ/merchant_shops',

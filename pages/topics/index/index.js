@@ -15,9 +15,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let sessionId = wx.getStorageSync('session_id')
     wx.request({
-      url: origin + '/all/topic_list',
+      url: origin + '/user/topic_list',
       method: 'get',
+      data: sessionId ? { session_id: sessionId } : {},
       success: (res) => {
         if (!res.data.success) {
           return wx.showToast({

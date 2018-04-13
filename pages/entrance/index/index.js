@@ -4,7 +4,7 @@ import { origin } from '../../../config.js'
 Page({
 
   data: {
-    curSign: 'signup',
+    curSign: 'signin',
     sendCodeDisabled: true // 发送验证码按钮
   },
 
@@ -49,16 +49,23 @@ Page({
     let captcha = data.captcha
     let password = data.password
 
-    if (isNaN(parseInt(username)) || username.length !== 11 || !(/^1[34578]\d{9}$/.test(username))) {
+    if (!username) {
       return appInstance.showToast({
-        text: '用户名不合法',
+        text: '手机号必填',
         type: 'error'
       })
     }
 
-    if (!captcha || captcha.length < 6) {
+    if (isNaN(parseInt(username)) || username.length !== 11 || !(/^1[34578]\d{9}$/.test(username))) {
       return appInstance.showToast({
-        text: '验证码不合法',
+        text: '手机号不合法',
+        type: 'error'
+      })
+    }
+
+    if (!captcha) {
+      return appInstance.showToast({
+        text: '验证码必填',
         type: 'error'
       })
     }
@@ -85,5 +92,66 @@ Page({
 
   signinSubmit(e) {
     console.log(e.detail.value)
+    let data = e.detail.value
+    let username = data.username
+    let captcha = data.captcha
+    let password = data.password
+
+    if (!username) {
+      return appInstance.showToast({
+        text: '手机号必填',
+        type: 'error'
+      })
+    }
+
+    if (isNaN(parseInt(username)) || !(/^1[34578]\d{9}$/.test(username))) {
+      return appInstance.showToast({
+        text: '手机号不合法',
+        type: 'error'
+      })
+    }
+
+    if (!password) {
+      return appInstance.showToast({
+        text: '密码必填',
+        type: 'error'
+      })
+    }
+
+    wx.request({
+      url: origin + '/user/login',
+      method: 'post',
+      data: {
+        username,
+        password
+      },
+      success: res => {
+        console.log(res.data)
+        if (!res.data.success) {
+          return appInstance.showToast({
+            text: res.data.msg,
+            type: 'error'
+          })
+        }
+
+        appInstance.showToast({
+          text: res.data.msg,
+          type: 'success'
+        })
+
+        appInstance.globalData.userData = res.data.data
+        wx.setStorageSync('session_id', res.data.session_id)
+
+        wx.switchTab({
+          url: '/pages/topics/index/index'
+        })
+      },
+      fail: err => {
+        appInstance.showToast({
+          text: '请求出错',
+          type: 'error'
+        })
+      }
+    })
   }
 })

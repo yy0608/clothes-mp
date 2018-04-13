@@ -1,11 +1,12 @@
 {
   "pages":[
-    "pages/entrance/index/index",
-    "pages/topics/detail/detail",
-    "pages/shops/index/index",
-    "pages/topics/index/index",
-    "pages/mine/index/index",
     "pages/test/multi-upload",
+    "pages/topics/detail/detail",
+    "pages/topics/comment/comment",
+    "pages/mine/index/index",
+    "pages/entrance/index/index",
+    "pages/topics/index/index",
+    "pages/shops/index/index",
     "pages/index/index"
   ],
   "window":{

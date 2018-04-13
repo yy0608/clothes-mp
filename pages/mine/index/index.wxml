@@ -1,2 +1,4 @@
-<!--pages/mine/index/index.wxml-->
-<text>pages/mine/index/index.wxml</text>
+<!-- <view class="avatar">
+  <image src="{{}}"></image>
+</view> -->
+<view class="username">111{{userData.username}}</view>
