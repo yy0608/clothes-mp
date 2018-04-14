@@ -1,5 +1,5 @@
 .topic-detail {
-  padding: 30rpx 20rpx;
+  padding: 30rpx 20rpx 120rpx;
 }
 .title {
   font-size: 36rpx;
@@ -9,6 +9,9 @@
   text-align: justify;
   line-height: 50rpx;
   color: #666;
+}
+.content-item text {
+  word-break: break-all;
 }
 .content-item image {
   width: 100%;
