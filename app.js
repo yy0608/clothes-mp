@@ -3,7 +3,7 @@ import { origin } from './config.js'
 App({
   globalData: {
     qqMapKey: '2Y4BZ-JU7KO-INAWM-SYJWI-6ZR22-K3BWU',
-    toastData: {},
+    toastData: null,
     timer: null,
     userData: {}
   },

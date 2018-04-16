@@ -3,7 +3,6 @@
 }
 .title {
   font-size: 36rpx;
-  margin-bottom: 30rpx;
 }
 .content-item {
   text-align: justify;
@@ -33,4 +32,15 @@
 .handle-item {
   width: 33.33%;
   text-align: center;
+}
+.author-cont {
+  font-size: 24rpx;
+  color: #888;
+  margin: 20rpx 0 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.author {
+  margin-right: 20rpx;
 }

@@ -8,6 +8,7 @@ Page({
    */
   data: {
     topicDetail: null,
+    commentCount: 0,
     imgOrigin
   },
 
@@ -16,11 +17,12 @@ Page({
    */
   onLoad: function (options) {
     this.myData = {}
-    this.myData._id = options._id ? options._id : '5acd6f44474d9225907b243d'
+    this.myData.topic_id = options._id ? options._id : '5ad1600257a5b90e58827de3'
+    this.myData.user_id = appInstance.globalData.userData._id
     let sessionId = wx.getStorageSync('session_id')
     wx.request({
       url: origin + '/user/topic_detail',
-      data: sessionId ? { session_id: sessionId, _id: this.myData._id } : { _id: this.myData._id },
+      data: sessionId ? { session_id: sessionId, _id: this.myData.topic_id } : { _id: this.myData.topic_id },
       method: 'get',
       success: res => {
         if (!res.data.success) {
@@ -30,12 +32,13 @@ Page({
           })
         }
         this.setData({
-          topicDetail: res.data.data
+          topicDetail: res.data.data,
+          commentCount: res.data.comment_count
         })
       },
       fail: err => {
         console.log(err)
-        return wx.showToast({
+        wx.showToast({
           title: '请求出错',
           icon: 'none'
         })
@@ -44,17 +47,46 @@ Page({
   },
 
   like () {
-    console.log(this.myData._id)
+    console.log(this.myData.topic_id)
 
     appInstance.showLoginModal()
   },
 
-  comment () {
-    let userData = appInstance.globalData.userData
+  collect () {
+    console.log(this.myData)
 
-    if (userData._id) {
+    if (!this.myData.user_id) {
+      return appInstance.showLoginModal()
+    }
+
+    wx.request({
+      url: origin + '/user/topic_collect',
+      method: 'post',
+      data: this.myData,
+      success: res => {
+        if (!res.data.success) {
+          return wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+
+        console.log(res.data)
+      },
+      fail: err => {
+        console.log(err)
+        wx.showToast({
+          title: '请求出错',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  comment () {
+    if (this.myData.user_id) {
       wx.navigateTo({
-        url: '/pages/topics/comment/comment?_id=' + this.myData._id
+        url: '/pages/topics/comment/comment?_id=' + this.myData.topic_id
       })
     } else {
       appInstance.showLoginModal()

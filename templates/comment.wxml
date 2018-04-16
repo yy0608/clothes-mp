@@ -1,0 +1,32 @@
+<wxs module="m3">
+  var utils = require('../utils.wxs')
+
+  var changeQiniuUrl = function(url, imgOrigin, qiniuQuery, defaultSrc) {
+    var url2 = url || defaultSrc
+    var reg = getRegExp('(http:\/\/)|(https:\/\/)')
+    return reg.test(url2) ? url2 : imgOrigin + url2 + qiniuQuery
+  }
+
+  module.exports = {
+    changeQiniuUrl: changeQiniuUrl,
+    getDateDis: utils.getDateDis
+  }
+</wxs>
+
+<template name="comment">
+  <view class="comment-item">
+    <view class="avatar">
+      <image mode="aspectFit" src="{{m3.changeQiniuUrl(author_id.avatar, 'http://img.wsweat.cn/', '?imageView2/2/w/160/h/160', 'common/nopic.jpg')}}"></image>
+    </view>
+    <view class="text-cont">
+      <view class="up-section">
+        <view class="name-time">
+          <view class="nickname">{{author_id.nickname || author_id.username}}</view>
+          <view class="time">{{m3.getDateDis(createdAt)}}</view>
+        </view>
+        <view class="like">点赞 {{like_count}}</view>
+      </view>
+      <view class="comment">{{comment}}</view>
+    </view>
+  </view>
+</template>

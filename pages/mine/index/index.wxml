@@ -1,4 +1,12 @@
-<!-- <view class="avatar">
-  <image src="{{}}"></image>
-</view> -->
-<view class="username">111{{userData.username}}</view>
+<view wx:if="{{userData.username}}" class="userdata-cont">
+  <view class="avatar">
+    <image src="{{userData.avatar}}" mode="aspectFill"></image>
+  </view>
+  <view class="nickname">{{userData.nickname}}</view>
+</view>
+<view wx:else class="sign-cont">
+  <button>登录/注册</button>
+</view>
+<view wx:if="{{userData.username}}" class="logout">
+  <button bindtap="logout">退出登录</button>
+</view>

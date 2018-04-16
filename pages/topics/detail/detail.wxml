@@ -1,5 +1,16 @@
+<wxs module="m4">
+  var utils = require('../../../utils.wxs')
+  module.exports = {
+    parseDate: utils.parseDate
+  }
+</wxs>
+
 <view class="topic-detail">
   <view class="title tc">{{topicDetail.title}}</view>
+  <view class="author-cont">
+    <view class="author">{{topicDetail.author_id.nickname || topicDetail.author_id.username}} 发布于 {{m4.parseDate(topicDetail.createdAt)}}</view>
+    <view class="view">浏览 {{topicDetail.view_count}} 次</view>
+  </view>
   <view class="content-item" wx:for="{{topicDetail.content}}" wx:key="{{index}}">
     <text wx:if="{{item.type === 1}}">{{item.value}}</text>
     <block wx:if="{{item.type === 2}}">
@@ -11,7 +22,7 @@
 </view>
 
 <view class="handle-bar">
-  <view class="handle-item" bindtap="like">点赞（999+）</view>
-  <view class="handle-item">收藏</view>
-  <view class="handle-item" bindtap="comment">评论（999+）</view>
+  <view class="handle-item" bindtap="like">点赞（{{topicDetail.like_count}}）</view>
+  <view class="handle-item" bindtap="collect">收藏</view>
+  <view class="handle-item" bindtap="comment">评论（{{commentCount}}）</view>
 </view>

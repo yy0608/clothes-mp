@@ -1,11 +1,11 @@
 {
   "pages":[
-    "pages/topics/index/index",
-    "pages/test/multi-upload",
     "pages/topics/detail/detail",
+    "pages/topics/index/index",
     "pages/topics/comment/comment",
     "pages/mine/index/index",
     "pages/entrance/index/index",
+    "pages/test/multi-upload",
     "pages/shops/index/index",
     "pages/index/index"
   ],

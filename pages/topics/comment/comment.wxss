@@ -1,1 +1,58 @@
-/* pages/topics/comment/comment.wxss */
+.comment-list-cont {
+  padding-bottom: 40rpx;
+}
+.comment-container {
+  padding-left: 30rpx;
+}
+.comment-cont {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.comment-cont textarea {
+  padding: 10rpx;
+  flex-grow: 1;
+}
+.comment-cont text {
+  margin-left: 30rpx;
+  flex-shrink: 0;
+}
+.comment-item {
+  display: flex;
+  padding: 30rpx 30rpx 30rpx 0;
+  margin-bottom: 30rpx;
+  border-bottom: 1rpx solid #e0e0e0;
+}
+.comment-item .avatar {
+  flex-shrink: 0;
+  width: 100rpx;
+  height: 100rpx;
+}
+.comment-item .avatar image {
+  width: 100%;
+  height: 100%;
+}
+.comment-item .text-cont {
+  flex-grow: 1;
+  margin-left: 20rpx;
+}
+.up-section {
+  display: flex;
+  align-items: center;
+}
+.name-time {
+  flex-grow: 1;
+}
+.time {
+  font-size: 20rpx;
+  color: #888;
+}
+.comment {
+  margin-top: 10rpx;
+}

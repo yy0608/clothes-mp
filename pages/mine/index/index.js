@@ -1,3 +1,4 @@
+import { origin } from '../../../config.js';
 const appInstance = getApp()
 
 Page({
@@ -6,64 +7,45 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userData: {}
+    userData: null
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
       userData: appInstance.globalData.userData
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
+  logout () {
+    wx.request({
+      url: origin + '/user/logout',
+      method: 'post',
+      success: res => {
+        if (!res.data.success) {
+          return wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
+        wx.removeStorageSync('session_id')
+        appInstance.globalData.userData = null
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
+        })
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+        wx.navigateTo({
+          url: '/pages/entrance/index/index'
+        })
+      },
+      fail: err => {
+        console.log(err)
+        wx.showToast({
+          title: '请求出错',
+          icon: 'none'
+        })
+      }
+    })
   }
 })

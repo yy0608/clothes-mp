@@ -1,2 +1,42 @@
-<!--pages/topics/comment/comment.wxml-->
-<text>pages/topics/comment/comment.wxml</text>
+<wxs module="m3">
+  var utils = require('../../../utils.wxs')
+
+  var changeQiniuUrl = function(url, imgOrigin, qiniuQuery, defaultSrc) {
+    var url2 = url || defaultSrc
+    var reg = getRegExp('(http:\/\/)|(https:\/\/)')
+    return reg.test(url2) ? url2 : imgOrigin + url2 + qiniuQuery
+  }
+
+  module.exports = {
+    changeQiniuUrl: changeQiniuUrl,
+    getDateDis: utils.getDateDis
+  }
+</wxs>
+
+<import src="/templates/comment.wxml" />
+
+<view class="comment-list-cont">
+  <view class="hot-comment comment-container">
+    <view class="title">热门评论</view>
+    <!-- <view wx:for="{{commentList}}" wx:key="{{item._id}}" class="comment-item">
+      <view class="avatar">
+        <image mode="aspectFit" src="{{m3.changeQiniuUrl(item.author_id.avatar, imgOrigin, qiniuQuery, defaultAvatarKey)}}"></image>
+      </view>
+      <view class="text-cont">
+        <view class="nickname">{{item.author_id.nickname || item.author_id.username}}</view>
+        <view class="time">{{m3.getDateDis(item.createdAt)}}</view>
+        <view class="comment">{{item.comment}}</view>
+      </view>
+    </view> -->
+    <template is="comment" wx:for="{{commentList}}" wx:key="{{item._id}}" data="{{...item}}" />
+  </view>
+  <view class="hot-comment comment-container">
+    <view class="title">最新评论</view>
+    <template is="comment" wx:for="{{commentList}}" wx:key="{{item._id}}" data="{{...item}}" />
+  </view>
+</view>
+
+<view class="comment-cont">
+  <textarea auto-height placeholder="请输入评论" bindblur="commentBlur"></textarea>
+  <text bindtap="comment">发布</text>
+</view>

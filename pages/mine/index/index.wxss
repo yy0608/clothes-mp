@@ -1,1 +1,19 @@
-/* pages/mine/index/index.wxss */
+.userdata-cont {
+  text-align: center;
+}
+.sign-cont {
+  padding: 0 30px;
+}
+.avatar image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+}
+.nickname {
+  margin-top: 30rpx;
+  font-size: 40rpx;
+}
+.logout {
+  margin: 100rpx 0 0;
+  padding: 0 30px;
+}

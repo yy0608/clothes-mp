@@ -5,7 +5,7 @@ page {
 .tc {
   text-align: center;
 }
-input {
+input, textarea {
   border: 1rpx solid #e0e0e0;
 }
 button {

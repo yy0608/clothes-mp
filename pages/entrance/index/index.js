@@ -4,12 +4,18 @@ import { origin } from '../../../config.js'
 Page({
 
   data: {
-    curSign: 'signin',
+    curSign: 'signup',
     sendCodeDisabled: true // 发送验证码按钮
   },
 
   onLoad: function (options) {
     this.myData = {}
+
+    if (options.tab === 'signup' || options.tab === 'signin') {
+      this.setData({
+        curSign: options.tab
+      })
+    }
   },
 
   toggleSign(e) {
@@ -44,10 +50,10 @@ Page({
 
   signupSubmit(e) {
     console.log(e.detail.value)
-    let data = e.detail.value
-    let username = data.username
-    let captcha = data.captcha
-    let password = data.password
+    let eData = e.detail.value
+    let username = eData.username
+    let captcha = eData.captcha
+    let password = eData.password
 
     if (!username) {
       return appInstance.showToast({
@@ -77,15 +83,44 @@ Page({
       })
     }
 
-    wx.request({
-      url: origin + '/user/register',
-      method: 'post',
-      data: {
-        username,
-        password
-      },
-      success: res => {
-        console.log(res.data)
+    let data = {
+      username,
+      password
+    }
+
+    wx.getUserInfo({ // 获取用户信息
+      complete: res => {
+        if (res.rawData) {
+          data.nickname = res.userInfo.nickName
+          data.avatar = res.userInfo.avatarUrl
+          data.user_info = res.rawData
+        }
+
+        wx.request({ // 注册
+          url: origin + '/user/register',
+          method: 'post',
+          data,
+          success: res => {
+            if (!res.data.success) {
+              return wx.showToast({
+                title: res.data.msg,
+                icon: 'none'
+              })
+            }
+
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+          },
+          fail: err => {
+            console.log(err)
+            wx.showToast({
+              title: '请求出错',
+              icon: 'none'
+            })
+          }
+        })
       }
     })
   },
@@ -104,12 +139,12 @@ Page({
       })
     }
 
-    if (isNaN(parseInt(username)) || !(/^1[34578]\d{9}$/.test(username))) {
-      return appInstance.showToast({
-        text: '手机号不合法',
-        type: 'error'
-      })
-    }
+    // if (isNaN(parseInt(username)) || !(/^1[34578]\d{9}$/.test(username))) {
+    //   return appInstance.showToast({
+    //     text: '手机号不合法',
+    //     type: 'error'
+    //   })
+    // }
 
     if (!password) {
       return appInstance.showToast({

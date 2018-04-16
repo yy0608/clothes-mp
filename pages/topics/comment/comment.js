@@ -1,68 +1,70 @@
-// pages/topics/comment/comment.js
+import { origin, imgOrigin, defaultAvatarKey } from '../../../config.js';
+const appInstance = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    commentList: [],
+    imgOrigin,
+    defaultAvatarKey,
+    qiniuQuery: '?imageView2/2/w/160/h/160'
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    let _id = options._id
+    this.myData = {}
+    this.myData.topic_id = options._id || '5ad1600257a5b90e58827de3'
+    this.myData.author_id = appInstance.globalData.userData._id
 
-    console.log(_id)
+    this.getCommentList()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  getCommentList () {
+    wx.request({
+      url: origin + '/user/comment_list',
+      method: 'get',
+      success: res => {
+        if (!res.data.success) {
+          return wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+        this.setData({
+          commentList: res.data.data
+        })
+        console.log(res.data.data)
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  commentBlur (e) {
+    this.myData.comment = e.detail.value
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  comment () {
+    wx.request({
+      url: origin + '/user/comment',
+      method: 'post',
+      data: this.myData,
+      success: res => {
+        if (!res.data.success) {
+          return wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+        console.log(res.data)
+      },
+      fail: err => {
+        console.log(err)
+        return wx.showToast({
+          title: '请求出错',
+          icon: 'none'
+        })
+      }
+    })
   }
 })
