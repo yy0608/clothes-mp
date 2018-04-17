@@ -37,6 +37,6 @@
 </view>
 
 <view class="comment-cont">
-  <textarea auto-height placeholder="请输入评论" bindblur="commentBlur"></textarea>
+  <textarea auto-height placeholder="请输入评论" bindblur="commentBlur" fixed></textarea>
   <text bindtap="comment">发布</text>
 </view>

@@ -1,8 +1,26 @@
-<block wx:if="{{false}}" wx:for="{{uploadData}}" wx:key="{{index}}">
-  <view wx:if="{{item.type === 1}}" class="text-item">
-    <textarea auto-height value="{{item.value}}" />
+<view class="topic-edit-cont">
+  <view class="edit-item">
+    <text>标题</text>
+    <textarea value="{{topicData.title}}" auto-height></textarea>
   </view>
-  <view wx:if="{{item.type === 2}}" class="image-item">
-    <image src="{{item.value}}"></image>
-  </view>
-</block>
+  <block wx:for="{{topicData.content}}" wx:key="{{index}}">
+    <view wx:if="{{item.type === 1}}" class="edit-item">
+      <text>文本内容</text>
+      <textarea value="{{item.value}}" data-index="{{index}}" auto-height bindinput="textInput"></textarea>
+    </view>
+    <view wx:if="{{item.type === 2}}" class="edit-item">
+      <text>图片内容</text>
+      <view class="img-cont">
+        <block wx:for="{{item.value}}" wx:for-item="item2" wx:for-index="index2" wx:key="index2">
+          <image src="{{item2}}?imageView2/2/w/160/h/160"></image>
+        </block>
+      </view>
+      <!-- <textarea value="{{item.value}}"></textarea> -->
+    </view>
+  </block>
+</view>
+<view class="handle-btns">
+  <button bindtap="addContent" data-type="{{1}}">添加文本</button>
+  <button bindtap="addContent" data-type="{{2}}">添加图片</button>
+  <button bindtap="submit" type="primary">发布帖子</button>
+</view>

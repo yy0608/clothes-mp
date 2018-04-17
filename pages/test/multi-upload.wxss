@@ -1,3 +1,43 @@
+.topic-edit-cont {
+  padding-bottom: 130rpx;
+}
 textarea {
+  padding: 30rpx;
   border: 1rpx solid #e0e0e0;
+}
+.edit-item {
+  display: flex;
+  padding: 20rpx 30rpx;
+}
+.edit-item text {
+  flex-shrink: 0;
+  width: 120rpx;
+  margin-right: 20rpx;
+}
+.edit-item textarea {
+  flex-grow: 1;
+}
+.edit-item .img-cont {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -10rpx;
+  margin-top: -10rpx;
+}
+.edit-item .img-cont image {
+  margin: 10rpx;
+}
+.handle-btns {
+  position: fixed;
+  padding: 30rpx;
+  left: 0;
+  border-top: 1rpx solid #e0e0e0;
+  background-color: #fff;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+}
+.img-cont image {
+  width: 160rpx;
+  height: 160rpx;
 }
