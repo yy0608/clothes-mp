@@ -109,8 +109,12 @@ Page({
             }
 
             wx.showToast({
-              title: res.data.msg,
+              title: '注册成功，请登录',
               icon: 'none'
+            })
+
+            this.setData({
+              curSign: 'signin'
             })
           },
           fail: err => {
@@ -177,9 +181,9 @@ Page({
         appInstance.globalData.userData = res.data.data
         wx.setStorageSync('session_id', res.data.session_id)
 
-        wx.switchTab({
-          url: '/pages/topics/index/index'
-        })
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 1000)
       },
       fail: err => {
         appInstance.showToast({

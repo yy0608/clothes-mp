@@ -39,7 +39,7 @@ App({
     })
   },
 
-  showLoginModal () {
+  showLoginModal (tab) {
     wx.showModal({
       title: '需要先登录',
       content: '前往登录或注册',
@@ -47,9 +47,11 @@ App({
       cancelText: '晚点再说',
       success: res => {
         if (res.confirm) {
-          wx.navigateTo({
-            url: '/pages/entrance/index/index'
-          })
+          let url = '/pages/entrance/index/index'
+          if (tab === 'signup' || tab === 'signin') {
+            url += '?tab=' + tab
+          }
+          wx.navigateTo({ url })
         }
       }
     })

@@ -5,7 +5,7 @@
   <view class="nickname">{{userData.nickname}}</view>
 </view>
 <view wx:else class="sign-cont">
-  <button>登录/注册</button>
+  <button bindtap="goLogin">登录/注册</button>
 </view>
 <view wx:if="{{userData.username}}" class="logout">
   <button bindtap="logout">退出登录</button>

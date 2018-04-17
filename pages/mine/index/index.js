@@ -10,7 +10,7 @@ Page({
     userData: null
   },
 
-  onLoad: function (options) {
+  onShow: function (options) {
     this.setData({
       userData: appInstance.globalData.userData
     })
@@ -20,6 +20,9 @@ Page({
     wx.request({
       url: origin + '/user/logout',
       method: 'post',
+      data: {
+        session_id: wx.getStorageSync('session_id')
+      },
       success: res => {
         if (!res.data.success) {
           return wx.showToast({
@@ -29,14 +32,14 @@ Page({
         }
 
         wx.removeStorageSync('session_id')
-        appInstance.globalData.userData = null
+        appInstance.globalData.userData = {}
         wx.showToast({
           title: res.data.msg,
           icon: 'none'
         })
 
         wx.navigateTo({
-          url: '/pages/entrance/index/index'
+          url: '/pages/entrance/index/index?tab=signin'
         })
       },
       fail: err => {
@@ -46,6 +49,12 @@ Page({
           icon: 'none'
         })
       }
+    })
+  },
+
+  goLogin () {
+    wx.navigateTo({
+      url: '/pages/entrance/index/index?tab=signin'
     })
   }
 })

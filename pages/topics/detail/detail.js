@@ -7,8 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    topicDetail: null,
+    topicDetail: {},
     commentCount: 0,
+    collected: false,
+    collectedCount: 0,
+    liked: false,
+    likedCount: 0,
     imgOrigin
   },
 
@@ -22,7 +26,7 @@ Page({
     let sessionId = wx.getStorageSync('session_id')
     wx.request({
       url: origin + '/user/topic_detail',
-      data: sessionId ? { session_id: sessionId, _id: this.myData.topic_id } : { _id: this.myData.topic_id },
+      data: sessionId ? { session_id: sessionId, ...this.myData } : this.myData,
       method: 'get',
       success: res => {
         if (!res.data.success) {
@@ -33,7 +37,11 @@ Page({
         }
         this.setData({
           topicDetail: res.data.data,
-          commentCount: res.data.comment_count
+          commentCount: res.data.comment_count,
+          collected: res.data.collected,
+          collectedCount: res.data.collected_count,
+          liked: res.data.liked,
+          likedCount: res.data.liked_count
         })
       },
       fail: err => {
@@ -47,22 +55,17 @@ Page({
   },
 
   like () {
-    console.log(this.myData.topic_id)
-
-    appInstance.showLoginModal()
-  },
-
-  collect () {
-    console.log(this.myData)
-
     if (!this.myData.user_id) {
-      return appInstance.showLoginModal()
+      return appInstance.showLoginModal('signin')
     }
 
     wx.request({
-      url: origin + '/user/topic_collect',
+      url: origin + '/user/topic_like',
       method: 'post',
-      data: this.myData,
+      data: {
+        ...this.myData,
+        liked: this.data.liked
+      },
       success: res => {
         if (!res.data.success) {
           return wx.showToast({
@@ -71,7 +74,69 @@ Page({
           })
         }
 
-        console.log(res.data)
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
+        })
+
+        if (this.data.liked) {
+          this.setData({
+            liked: false,
+            likedCount: this.data.likedCount - 1
+          })
+        } else {
+          this.setData({
+            liked: true,
+            likedCount: this.data.likedCount + 1
+          })
+        }
+      },
+      fail: err => {
+        console.log(err)
+        wx.showToast({
+          title: '请求出错',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  collect () {
+    if (!this.myData.user_id) {
+      return appInstance.showLoginModal('signin')
+    }
+
+    wx.request({
+      url: origin + '/user/topic_collect',
+      method: 'post',
+      data: {
+        ...this.myData,
+        collected: this.data.collected
+      },
+      success: res => {
+        if (!res.data.success) {
+          return wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
+        })
+
+        if (this.data.collected) {
+          this.setData({
+            collected: false,
+            collectedCount: this.data.collectedCount - 1
+          })
+        } else {
+          this.setData({
+            collected: true,
+            collectedCount: this.data.collectedCount + 1
+          })
+        }
       },
       fail: err => {
         console.log(err)
@@ -89,7 +154,7 @@ Page({
         url: '/pages/topics/comment/comment?_id=' + this.myData.topic_id
       })
     } else {
-      appInstance.showLoginModal()
+      appInstance.showLoginModal('signin')
     }
   }
 })

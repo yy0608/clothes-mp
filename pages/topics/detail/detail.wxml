@@ -22,7 +22,7 @@
 </view>
 
 <view class="handle-bar">
-  <view class="handle-item" bindtap="like">点赞（{{topicDetail.like_count}}）</view>
-  <view class="handle-item" bindtap="collect">收藏</view>
+  <view class="handle-item" bindtap="like">{{liked ? '已点赞' : '点赞'}}（{{likedCount}}）</view>
+  <view class="handle-item" bindtap="collect">{{collected ? '已收藏' : '收藏'}}（{{collectedCount}}）</view>
   <view class="handle-item" bindtap="comment">评论（{{commentCount}}）</view>
 </view>
