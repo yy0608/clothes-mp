@@ -1,8 +1,8 @@
 {
   "pages":[
-    "pages/test/multi-upload",
-    "pages/topics/add/add",
     "pages/topics/index/index",
+    "pages/topics/add/add",
+    "pages/test/multi-upload",
     "pages/topics/detail/detail",
     "pages/mine/index/index",
     "pages/topics/comment/comment",

@@ -5,30 +5,40 @@ import { origin, imgOrigin } from '../../config.js'
 Page({
 
   data: {
-    uploadSrc: '',
+    imgOrigin,
     topicData: {
       title: '',
       content: [{
         type: 1,
-        value: '创造性'
-      }, {
-        type: 2,
-        value: ['https://img.wsweat.cn/common/nopic.jpg', 'https://img.wsweat.cn/common/nopic.jpg', 'https://img.wsweat.cn/common/nopic.jpg', 'https://img.wsweat.cn/common/nopic.jpg', 'https://img.wsweat.cn/common/nopic.jpg']
+        value: ''
       }]
     }
   },
+
   onLoad() {
-    // wx.request({
-    //   // url: origin + '/employ/merchant_shops',
-    //   url: origin + '/employ/near_shops',
-    //   method: 'get',
-    //   data: {
-    //     location: '114.001432, 22.681253'
-    //   },
-    //   success: res => {
-    //     console.log(res.data)
-    //   }
-    // })
+  },
+
+  addImg (e) {
+    let index = e.currentTarget.dataset.index
+
+    this.uploadImg(key => {
+      this.data.topicData.content[index].value.push(key)
+
+      this.setData({
+        topicData: this.data.topicData
+      })
+    })
+  },
+
+  delImg(e) {
+    let dataset = e.currentTarget.dataset
+    let index = dataset.index
+    let idx = dataset.idx
+
+    this.data.topicData.content[index].value.splice(idx, 1)
+    this.setData({
+      topicData: this.data.topicData
+    })
   },
 
   addContent (e) {
@@ -53,17 +63,29 @@ Page({
       case 2:
         let lastContent = this.data.topicData.content[this.data.topicData.content.length - 1]
         if (lastContent.type === 2) {
-          lastContent.value.push('https://img.wsweat.cn/common/nopic.jpg')
-        } else {
-          if (!lastContent.value) {
-            return wx.showToast({
-              title: '请填充内容，或删除输入项',
-              icon: 'none'
+          this.uploadImg(key => {
+            lastContent.value.push(key)
+
+            this.setData({
+              topicData: this.data.topicData
             })
-          }
-          this.data.topicData.content.push({
-            type: 2,
-            value: ['https://img.wsweat.cn/common/nopic.jpg']
+
+            this.pageScrollToBottom()
+          })
+        } else {
+          if (this.checkIsEmpty()) return
+
+          this.uploadImg(key => {
+            this.data.topicData.content.push({
+              type: 2,
+              value: [key]
+            })
+
+            this.setData({
+              topicData: this.data.topicData
+            })
+
+            this.pageScrollToBottom()
           })
         }
         break
@@ -71,9 +93,20 @@ Page({
         console.log('type出错')
         break
     }
+  },
+
+  delContent (e) {
+    let index = e.currentTarget.dataset.index
+
+    this.data.topicData.content.splice(index, 1)
+
     this.setData({
       topicData: this.data.topicData
     })
+  },
+
+  titleInput(e) {
+    this.data.topicData.title = e.detail.value
   },
 
   textInput (e) {
@@ -82,7 +115,40 @@ Page({
     this.data.topicData.content[index].value = e.detail.value
   },
 
-  didPressChooseImage: function () {
+  submit () {
+    if (!this.data.topicData.title.trim()) {
+      return wx.showToast({
+        title: '标题不能为空',
+        icon: 'none'
+      })
+    }
+    
+    if (this.checkIsEmpty()) return
+
+    wx.request({
+      url: origin + '/user/topic_add',
+      method: 'post',
+      data: this.data.topicData,
+      success: res => {
+        if (!res.data.success) {
+          return wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+        console.log(res.data)
+      },
+      fail: err => {
+        console.log(err)
+        return wx.showToast({
+          title: '请求出错',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  uploadImg: function (cb) { // 上传图片到七牛
     var that = this;
     // 选择图片
     wx.chooseImage({
@@ -93,6 +159,7 @@ Page({
         // 交给七牛上传
         qiniuUploader.upload(filePath, res => { // res的值hash, key, imageURL
           console.log(res)
+          cb && cb(res.key)
         }, err => { // err的值error, imageURL(imgOrigin + undefined)
           console.log('error: ' + err);
         }, {
@@ -108,5 +175,42 @@ Page({
           });
       }
     })
+  },
+
+  checkIsEmpty () {
+    for (let item of this.data.topicData.content) {
+      switch (item.type) {
+        case 1:
+          if (!item.value.trim()) {
+            wx.showToast({
+              title: '文本内容不能为空',
+              icon: 'none'
+            })
+            return true
+          }
+          break
+        case 2:
+          if (!item.value.length) {
+            wx.showToast({
+              title: '图片内容不能为空',
+              icon: 'none'
+            })
+            return true
+          }
+          break
+        default:
+          return false
+          break
+      }
+    }
+  },
+
+  pageScrollToBottom: () => {
+    wx.createSelectorQuery().select('#j_page').boundingClientRect(function (rect) {
+      // 使页面滚动到底部
+      wx.pageScrollTo({
+        scrollTop: rect.bottom
+      })
+    }).exec()
   }
 })

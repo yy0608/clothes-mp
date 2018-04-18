@@ -36,6 +36,13 @@ Page({
           commentList: res.data.data
         })
         console.log(res.data.data)
+      },
+      fail: err => {
+        console.log(err)
+        return wx.showToast({
+          title: '请求出错',
+          icon: 'none'
+        })
       }
     })
   },

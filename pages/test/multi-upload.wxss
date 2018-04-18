@@ -9,23 +9,25 @@ textarea {
   display: flex;
   padding: 20rpx 30rpx;
 }
-.edit-item text {
+.edit-item .text-cont {
   flex-shrink: 0;
   width: 120rpx;
   margin-right: 20rpx;
 }
+.edit-item .text-cont .del {
+  font-size: 20rpx;
+  text-align: center;
+  padding: 20rpx 20rpx 0 20rpx;
+}
 .edit-item textarea {
   flex-grow: 1;
 }
-.edit-item .img-cont {
+.edit-item .img-container {
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
   margin-left: -10rpx;
   margin-top: -10rpx;
-}
-.edit-item .img-cont image {
-  margin: 10rpx;
 }
 .handle-btns {
   position: fixed;
@@ -36,8 +38,35 @@ textarea {
   bottom: 0;
   width: 100%;
   display: flex;
+  z-index: 10;
+}
+.img-cont {
+  position: relative;
+  width: 166rpx;
+  height: 166rpx;
+  margin: 10rpx;
 }
 .img-cont image {
-  width: 160rpx;
-  height: 160rpx;
+  width: 100%;
+  height: 100%;
+}
+.img-close {
+  background-color: #fff;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 50%;
+  position: absolute;
+  right: -15rpx;
+  top: -15rpx;
+}
+.img-add {
+  width: 166rpx;
+  margin:10rpx;
+  line-height: 166rpx;
+  text-align: center;
+  font-size: 56rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #e0e0e0;
 }

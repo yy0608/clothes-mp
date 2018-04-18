@@ -1,5 +1,6 @@
-import { origin, imgOrigin } from '../../../config.js';
+import { origin, imgOrigin } from '../../../config.js'
 const appInstance = getApp()
+import utils from '../../../utils.js'
 
 Page({
 
@@ -26,7 +27,9 @@ Page({
     let sessionId = wx.getStorageSync('session_id')
     wx.request({
       url: origin + '/user/topic_detail',
-      data: sessionId ? { session_id: sessionId, ...this.myData } : this.myData,
+      data: utils.filterEmptyValue({
+        session_id: sessionId, ...this.myData
+      }),
       method: 'get',
       success: res => {
         if (!res.data.success) {

@@ -1,19 +1,27 @@
-<view class="topic-edit-cont">
+<view class="topic-edit-cont" id="j_page">
   <view class="edit-item">
-    <text>标题</text>
-    <textarea value="{{topicData.title}}" auto-height></textarea>
+    <view class="text-cont">标题</view>
+    <textarea value="{{topicData.title}}" auto-height bindinput="titleInput"></textarea>
   </view>
   <block wx:for="{{topicData.content}}" wx:key="{{index}}">
     <view wx:if="{{item.type === 1}}" class="edit-item">
-      <text>文本内容</text>
+      <view class="text-cont">
+        <view class="label">文本内容</view>
+        <view class="del" wx:if="{{topicData.content.length > 1}}" data-index="{{index}}" bindtap="delContent">删除</view>
+      </view>
       <textarea value="{{item.value}}" data-index="{{index}}" auto-height bindinput="textInput"></textarea>
     </view>
     <view wx:if="{{item.type === 2}}" class="edit-item">
-      <text>图片内容</text>
-      <view class="img-cont">
-        <block wx:for="{{item.value}}" wx:for-item="item2" wx:for-index="index2" wx:key="index2">
-          <image src="{{item2}}?imageView2/2/w/160/h/160"></image>
-        </block>
+      <view class="text-cont">
+        <view class="label">图片内容</view>
+        <view class="del" wx:if="{{topicData.content.length > 1}}" data-index="{{index}}" bindtap="delContent">删除</view>
+      </view>
+      <view class="img-container">
+        <view class="img-cont" wx:for="{{item.value}}" wx:for-item="item2" wx:for-index="index2" wx:key="index2">
+          <image src="{{imgOrigin + item2}}?imageView2/2/w/160/h/160"></image>
+          <view class="img-close" data-index="{{index}}" data-idx="{{index2}}" bindtap="delImg">X</view>
+        </view>
+        <view class="img-add" bindtap="addImg" data-index="{{index}}">+</view>
       </view>
       <!-- <textarea value="{{item.value}}"></textarea> -->
     </view>
