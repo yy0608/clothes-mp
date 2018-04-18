@@ -24,3 +24,5 @@
     </view>
   </view>
 </view>
+
+<view class="topic-add" bindtap="topicAdd">发帖</view>

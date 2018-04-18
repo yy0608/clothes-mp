@@ -28,3 +28,15 @@ page {
   margin-bottom: 10rpx;
   color: #888;
 }
+.topic-add {
+  position: fixed;
+  right: 50rpx;
+  bottom: 50rpx;
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, .2);
+}

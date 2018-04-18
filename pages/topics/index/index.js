@@ -1,4 +1,5 @@
 import { origin, imgOrigin } from '../../../config.js'
+const appInstance = getApp()
 
 // pages/topics/index/index.js
 Page({
@@ -31,6 +32,13 @@ Page({
           topicList: res.data.data
         })
         console.log(res.data.data)
+      },
+      fail: err => {
+        console.log(err)
+        wx.showToast({
+          title: '请求出错',
+          icon: 'none'
+        })
       }
     })
   },
@@ -46,5 +54,15 @@ Page({
         })
       }
     })
+  },
+
+  topicAdd () {
+    if (appInstance.globalData.userData._id) {
+      wx.navigateTo({
+        url: '/pages/topics/add/add'
+      })
+    } else {
+      appInstance.showLoginModal('signin')
+    }
   }
 })

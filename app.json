@@ -1,10 +1,10 @@
 {
   "pages":[
+    "pages/mine/index/index",
     "pages/topics/index/index",
     "pages/topics/add/add",
     "pages/test/multi-upload",
     "pages/topics/detail/detail",
-    "pages/mine/index/index",
     "pages/topics/comment/comment",
     "pages/entrance/index/index",
     "pages/shops/index/index",
@@ -28,7 +28,7 @@
       "text": "我的"
     }],
     "color": "#888",
-    "selectedColor": "blue",
+    "selectedColor": "#0f0",
     "backgroundColor": "#fff"
   }
 }

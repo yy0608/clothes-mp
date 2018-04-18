@@ -4,9 +4,13 @@
 .sign-cont {
   padding: 0 30px;
 }
+.avatar {
+  margin-top: 30rpx;
+}
 .avatar image {
   width: 160rpx;
   height: 160rpx;
+  margin: 0 auto;
   border-radius: 50%;
 }
 .nickname {
@@ -16,4 +20,13 @@
 .logout {
   margin: 100rpx 0 0;
   padding: 0 30px;
+}
+.handle-cont {
+  margin-top: 100rpx;
+  padding-left: 30rpx;
+}
+.handle-item {
+  font-size: 32rpx;
+  padding: 50rpx 50rpx 50rpx 0;
+  border-bottom: 1rpx solid #e0e0e0;
 }
