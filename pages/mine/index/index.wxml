@@ -1,16 +1,18 @@
-<view wx:if="{{userData.username}}" class="userdata-cont">
-  <view class="avatar">
-    <image src="{{userData.avatar}}" mode="aspectFill"></image>
+<block wx:if="{{userData.username}}">
+  <view class="userdata-cont">
+    <view class="avatar">
+      <image src="{{userData.avatar}}" mode="aspectFill"></image>
+    </view>
+    <view class="nickname">{{userData.nickname}}</view>
   </view>
-  <view class="nickname">{{userData.nickname}}</view>
-</view>
-<view class="handle-cont">
-  <view class="handle-item">收藏的店铺</view>
-  <view class="handle-item">收藏的帖子</view>
-</view>
-<view wx:if="{{userData.username}}" class="logout">
-  <button bindtap="logout">退出登录</button>
-</view>
+  <view class="handle-cont">
+    <view class="handle-item">收藏的店铺</view>
+    <view class="handle-item">收藏的帖子</view>
+  </view>
+  <view class="logout">
+    <button bindtap="logout">退出登录</button>
+  </view>
+</block>
 <view wx:else class="sign-cont">
   <button bindtap="goLogin">登录/注册</button>
 </view>

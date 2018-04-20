@@ -23,6 +23,9 @@ Page({
   onLoad: function (options) {
     this.myData = {}
     this.myData.topic_id = options._id || '5ad1600257a5b90e58827de3'
+  },
+
+  onShow () {
     this.myData.user_id = appInstance.globalData.userData._id
     let sessionId = wx.getStorageSync('session_id')
     wx.request({

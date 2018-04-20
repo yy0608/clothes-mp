@@ -30,3 +30,6 @@
   padding: 50rpx 50rpx 50rpx 0;
   border-bottom: 1rpx solid #e0e0e0;
 }
+.sign-cont {
+  margin-top: 100px;
+}

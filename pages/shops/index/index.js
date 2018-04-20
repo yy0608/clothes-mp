@@ -40,10 +40,11 @@ Page({
               this.setData({
                 locationStatus: 1
               })
-              let location = {
-                latitude: res.latitude,
-                longitude: res.longitude
-              }
+              // let location = {
+              //   latitude: res.latitude,
+              //   longitude: res.longitude
+              // }
+              let location = (res.longitude + ',' + res.latitude)
               this.getNearbyStoreList(location)
               // this.locationToAddress(location)
               // this.setMapData(location)
@@ -118,10 +119,12 @@ Page({
   },
 
   getNearbyStoreList(location) {
+    console.log(location)
     if (this.data.getListSuccess) return
     wx.request({
-      url: origin + '/employ/merchant_shops',
+      url: origin + '/user/near_shops',
       method: 'get',
+      data: { location },
       success: res => {
         if (!res.data.success) {
           return wx.showToast({

@@ -8,9 +8,7 @@ module.exports = {
   changeQiniuUrl: utils.changeQiniuUrl
 }
 </wxs>
-
 <view wx:if="{{locationStatus !== 1}}" class="before-location">
-  {{locationStatus}}
   <view wx:if="{{!locationStatus}}" class="text">获取附近宝贝信息</view>
   <view wx:if="{{locationStatus === 2}}" class="text">手机未开启gps，开启后获取地址</view>
   <view wx:if="{{locationStatus === 3}}" class="text">打开地理位置</view>
@@ -23,7 +21,7 @@ module.exports = {
     <button>先逛逛</button>
   </view> -->
 </view>
-<block wx:else>
+<block wx:if="{{locationStatus === 1}}">
 <!-- <view class="head-section">
   <view class="address-cont" bindtap="getLocation">
     <image class="reload" src="/assets/icons/reload.png"></image>
@@ -47,5 +45,4 @@ module.exports = {
     </view>
   </view>
 </view>
-<map wx:if="{{showMapFlag}}" id="map" scale="15" show-location="{{true}}" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" bindmarkertap="goToggery" bindcallouttap="goToggery"></map>
 </block>

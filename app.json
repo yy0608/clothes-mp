@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/shops/index/index",
     "pages/mine/index/index",
     "pages/topics/index/index",
     "pages/topics/add/add",
@@ -7,7 +8,6 @@
     "pages/topics/detail/detail",
     "pages/topics/comment/comment",
     "pages/entrance/index/index",
-    "pages/shops/index/index",
     "pages/index/index"
   ],
   "window":{
