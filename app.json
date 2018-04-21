@@ -1,10 +1,10 @@
 {
   "pages":[
+    "pages/shops/index/index",
+    "pages/topics/index/index",
     "pages/goods/detail/detail",
     "pages/goods/index/index",
-    "pages/shops/index/index",
     "pages/mine/index/index",
-    "pages/topics/index/index",
     "pages/topics/add/add",
     "pages/test/multi-upload",
     "pages/topics/detail/detail",

@@ -1,2 +1,15 @@
-<!--pages/goods/detail/detail.wxml-->
-<text>pages/goods/detail/detail.wxml</text>
+<swiper indicator-dots autoplay circular interval="{{6000}}" next-margin="30rpx" duration="{{300}}">
+  <swiper-item wx:for="{{goodsDetail.figure_imgs}}" wx:key="{{index}}" data-index="{{index}}" bindtap="previewFigure">
+    <image src="{{imgOrigin + item}}?imageView2/1/w/800/h/800" class="swiper-img"/>
+  </swiper-item>
+</swiper>
+<view class="text-cont">
+  <view class="title">{{goodsDetail.title}}</view>
+  <view class="shop-name">{{goodsDetail.shop_id.name}}</view>
+  <view class="valuation">{{goodsDetail.valuation / 100}}元，具体以店内为准</view>
+</view>
+<view class="detail-cont">
+  <view class="img-cont" wx:for="{{goodsDetail.detail_imgs}}" wx:key="{{index}}">
+    <image src="{{imgOrigin + item}}" mode="widthFix"></image>
+  </view>
+</view>

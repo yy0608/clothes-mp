@@ -36,7 +36,7 @@ module.exports = {
     <image wx:else class="way-change" src="/assets/icons/list.png"></image>
   </view>
 </view> -->
-<view class="toggery-container">
+<view wx:if="{{toggeryData.length}}" class="toggery-container">
   <view wx:for="{{toggeryData}}" wx:key="{{index}}" data-_id="{{item._id}}" class="toggery-item" bindtap="goToggery">
     <view class="logo-cont">
       <image src="{{m2.changeQiniuUrl(item.logo, imgOrigin, qiniuQuery)}}" mode="aspectFit" class="logo"></image>
@@ -49,4 +49,5 @@ module.exports = {
     </view>
   </view>
 </view>
+<view wx:else class="no-data">没有店铺列表信息</view>
 </block>

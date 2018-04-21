@@ -128,6 +128,7 @@ Page({
 
   getNearbyStoreList(location) {
     if (this.data.getListSuccess) return
+    wx.showLoading({ mask: true })
     wx.request({
       url: origin + '/user/near_shops',
       method: 'get',
@@ -151,6 +152,9 @@ Page({
           title: '请求出错',
           icon: 'none'
         })
+      },
+      complate: () => {
+        wx.hideLoading()
       }
     })
   }

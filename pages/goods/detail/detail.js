@@ -3,7 +3,8 @@ import { origin, imgOrigin } from '../../../config.js';
 Page({
 
   data: {
-    imgOrigin
+    imgOrigin,
+    goodsDetail: []
   },
 
   /**
@@ -25,6 +26,9 @@ Page({
         }
 
         console.log(res.data.data)
+        this.setData({
+          goodsDetail: res.data.data
+        })
       },
       fail: err => {
         console.log(err)
@@ -34,6 +38,18 @@ Page({
           icon: 'none'
         })
       }
+    })
+  },
+
+  previewFigure (e) {
+    let index = e.currentTarget.dataset.index
+    let parsedImgArr = this.data.goodsDetail.figure_imgs.map(item => {
+      return imgOrigin + item
+    })
+
+    wx.previewImage({
+      urls: parsedImgArr,
+      current: parsedImgArr[index] + '?imageView2/0/w/750'
     })
   }
 })

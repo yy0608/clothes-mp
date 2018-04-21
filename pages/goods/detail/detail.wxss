@@ -1,1 +1,26 @@
-/* pages/goods/detail/detail.wxss */
+swiper {
+  height: 750rpx;
+}
+.swiper-img {
+  width: 750rpx;
+  height: 750rpx;
+}
+.text-cont {
+  padding: 20rpx;
+}
+.title {
+  font-size: 32rpx;
+}
+.shop-name {
+  margin-top: 10rpx;
+}
+.valuation {
+  margin-top: 10rpx;
+}
+.img-cont {
+  width: 750rpx;
+  margin-top: 10rpx;
+}
+.img-cont image {
+  width: 100%;
+}

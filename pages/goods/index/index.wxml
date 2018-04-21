@@ -1,7 +1,7 @@
-<view class="list-cont">
+<view wx:if="{{goodsList.length}}" class="list-cont">
   <view class="list-item" wx:for="{{goodsList}}" wx:key="{{item._id}}" data-_id="{{item._id}}" bindtap="goGoods">
     <view class="img-cont">
-      <image src="{{imgOrigin + item.cover}}?imageView2/2/w/160/h/160" mode="aspectFill"></image>
+      <image src="{{imgOrigin + item.cover}}?imageView2/2/w/400/h/400" mode="aspectFill"></image>
     </view>
     <view class="text-cont">
       <view class="title">{{item.title}}</view>
@@ -9,3 +9,4 @@
     </view>
   </view>
 </view>
+<view wx:else class="no-data">没有商品列表信息</view>

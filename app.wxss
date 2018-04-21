@@ -6,6 +6,10 @@ page {
 .tc {
   text-align: center;
 }
+.no-data {
+  text-align: center;
+  line-height: 100vh;
+}
 input, textarea {
   border: 1rpx solid #e0e0e0;
 }
