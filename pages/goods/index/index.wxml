@@ -1,0 +1,11 @@
+<view class="list-cont">
+  <view class="list-item" wx:for="{{goodsList}}" wx:key="{{item._id}}" data-_id="{{item._id}}" bindtap="goGoods">
+    <view class="img-cont">
+      <image src="{{imgOrigin + item.cover}}?imageView2/2/w/160/h/160" mode="aspectFill"></image>
+    </view>
+    <view class="text-cont">
+      <view class="title">{{item.title}}</view>
+      <view class="valuation">{{item.valuation / 100}}元左右，具体店内为准</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+page {
+  background-color: #f6f6f6;
+}
+.list-cont {
+  display: flex;
+  flex-wrap: wrap;
+}
+.list-item {
+  background-color: #fff;
+}
+.list-item:nth-child(even) {
+  margin-left: 10rpx;
+}
+.img-cont image {
+  width: 370rpx;
+}
+.text-cont {
+  padding: 20rpx;
+}

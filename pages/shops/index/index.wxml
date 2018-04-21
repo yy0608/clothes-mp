@@ -3,9 +3,13 @@
 
 <wxs module="m2">
 var utils = require('../../../utils.wxs')
+var fixedFloat = function (float) {
+  return float.toFixed(2)
+}
 
 module.exports = {
-  changeQiniuUrl: utils.changeQiniuUrl
+  changeQiniuUrl: utils.changeQiniuUrl,
+  fixedFloat: fixedFloat
 }
 </wxs>
 <view wx:if="{{locationStatus !== 1}}" class="before-location">
@@ -33,14 +37,14 @@ module.exports = {
   </view>
 </view> -->
 <view class="toggery-container">
-  <view wx:for="{{toggeryData}}" wx:key="{{index}}" data-id="{{item.id}}" data-name="{{item.name}}" data-address="{{item.address}}" data-latitude="{{item.latitude}}" data-longitude="{{item.longitude}}" class="toggery-item" bindtap="goToggery">
+  <view wx:for="{{toggeryData}}" wx:key="{{index}}" data-_id="{{item._id}}" class="toggery-item" bindtap="goToggery">
     <view class="logo-cont">
       <image src="{{m2.changeQiniuUrl(item.logo, imgOrigin, qiniuQuery)}}" mode="aspectFit" class="logo"></image>
     </view>
     <view class="text-cont">
       <view class="name">{{item.name}}</view>
       <view class="desc">{{item.desc}}</view>
-      <view class="address">000m</view>
+      <view class="address">{{item.address}}{{m2.fixedFloat(item.distance_m)}}m</view>
       <view>{{item.merchant_id.name}}</view>
     </view>
   </view>

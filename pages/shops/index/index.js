@@ -24,6 +24,14 @@ Page({
     this.checkSetting()
   },
 
+  goToggery (e) {
+    let shopId = e.currentTarget.dataset._id
+    
+    wx.navigateTo({
+      url: '/pages/goods/index/index?shop_id=' + shopId
+    })
+  },
+
   checkSetting() {
     wx.getSetting({
       success: res => {
@@ -119,7 +127,6 @@ Page({
   },
 
   getNearbyStoreList(location) {
-    console.log(location)
     if (this.data.getListSuccess) return
     wx.request({
       url: origin + '/user/near_shops',
@@ -136,7 +143,7 @@ Page({
           toggeryData: res.data.data,
           getListSuccess: true
         })
-        console.log(res.data.data)
+        console.log(res.data.data[0])
       },
       fail: err => {
         console.log(err)
