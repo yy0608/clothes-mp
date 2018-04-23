@@ -1,0 +1,41 @@
+<wxs module="m2">
+var utils = require('../../../utils.wxs')
+
+module.exports = {
+  changeQiniuUrl: utils.changeQiniuUrl
+}
+</wxs>
+
+<scroll-view scroll-y>
+  <view class="blank-cont"></view>
+  <view
+    class="{{index === leftCurIndex ? 'cur left-category' : 'left-category'}}"
+    wx:for="{{leftCategories}}"
+    wx:key="{{item._id}}"
+    data-_id="{{item._id}}"
+    data-index="{{index}}"
+    bindtap="changeCategory">{{item.name}}</view>
+</scroll-view>
+<view class="right-categories">
+  <view
+    class="right-category-item"
+    wx:for="{{rightCategories}}"
+    wx:key="{{item._id}}"
+  >
+    <view class="label">{{item.name}}</view>
+    <view class="child-category-cont">
+      <view
+        class="child-category-item"
+        wx:for="{{item.children}}"
+        wx:key="{{item2._id}}"
+        wx:for-item="item2"
+        wx:for-index="index2"
+        data-_id="{{item2._id}}"
+        bindtap="goGoods"
+      >
+        <image src="{{m2.changeQiniuUrl(item2.icon, imgOrigin, qiniuQuery)}}" mode="aspectFill"></image>
+        <view class="title">{{item2.name}}</view>
+      </view>
+    </view>
+  </view>
+</view>

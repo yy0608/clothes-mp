@@ -1,14 +1,16 @@
 {
   "pages":[
+    "pages/mine/index/index",
+    "pages/topics/comment/comment",
     "pages/shops/index/index",
+    "pages/categories/index/index",
     "pages/topics/index/index",
+    "pages/topics/collected/collected",
     "pages/goods/detail/detail",
     "pages/goods/index/index",
-    "pages/mine/index/index",
     "pages/topics/add/add",
     "pages/test/multi-upload",
     "pages/topics/detail/detail",
-    "pages/topics/comment/comment",
     "pages/entrance/index/index",
     "pages/index/index"
   ],
@@ -22,6 +24,9 @@
     "list": [{
       "pagePath": "pages/shops/index/index",
       "text": "店铺"
+    }, {
+      "pagePath": "pages/categories/index/index",
+      "text": "分类"
     }, {
       "pagePath": "pages/topics/index/index",
       "text": "帖子"

@@ -1,4 +1,5 @@
 import { origin, imgOrigin } from '../../../config.js';
+import utils from '../../../utils.js';
 
 Page({
 
@@ -14,12 +15,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let shopId = options.shop_id || '5aab848fb07552196c2da73b'
+    let shopId = options.shop_id // || '5aab848fb07552196c2da73b'
+    let categoryId = options.category_id
 
     wx.request({
       url: origin + '/user/goods_list',
       method: 'get',
-      data: { shop_id: shopId },
+      data: utils.filterEmptyValue({
+        shop_id: shopId,
+        category_id: categoryId
+      }),
       success: res => {
         console.log(res.data.data)
         if (!res.data.success) {

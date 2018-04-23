@@ -6,8 +6,8 @@
     <view class="nickname">{{userData.nickname}}</view>
   </view>
   <view class="handle-cont">
-    <view class="handle-item">收藏的店铺</view>
-    <view class="handle-item">收藏的帖子</view>
+    <view class="handle-item" bindtap="goCollectedShops">收藏的店铺</view>
+    <view class="handle-item" bindtap="goCollectedTopics">收藏的帖子</view>
   </view>
   <view class="logout">
     <button bindtap="logout">退出登录</button>

@@ -49,10 +49,15 @@
 .name-time {
   flex-grow: 1;
 }
+.nickname {
+  position: relative;
+  top: -10rpx;
+}
 .time {
   font-size: 20rpx;
   color: #888;
 }
 .comment {
   margin-top: 10rpx;
+  text-align: justify;
 }

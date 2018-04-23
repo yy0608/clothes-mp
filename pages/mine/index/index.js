@@ -56,5 +56,13 @@ Page({
     wx.navigateTo({
       url: '/pages/entrance/index/index?tab=signin'
     })
+  },
+
+  goCollectedShops () {},
+
+  goCollectedTopics () {
+    wx.navigateTo({
+      url: '/pages/topics/collected/collected?user_id' + this.data.userData._id
+    })
   }
 })

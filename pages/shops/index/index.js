@@ -153,7 +153,7 @@ Page({
           icon: 'none'
         })
       },
-      complate: () => {
+      complete: () => {
         wx.hideLoading()
       }
     })
