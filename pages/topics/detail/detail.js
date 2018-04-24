@@ -31,7 +31,8 @@ Page({
     wx.request({
       url: origin + '/user/topic_detail',
       data: utils.filterEmptyValue({
-        session_id: sessionId, ...this.myData
+        ...this.myData,
+        session_id: sessionId
       }),
       method: 'get',
       success: res => {
@@ -68,10 +69,15 @@ Page({
     wx.request({
       url: origin + '/user/topic_like',
       method: 'post',
-      data: {
+      data: utils.filterEmptyValue({
         ...this.myData,
+        session_id: sessionId,
         liked: this.data.liked
-      },
+      }),
+      // data: {
+      //   ...this.myData,
+      //   liked: this.data.liked
+      // },
       success: res => {
         if (!res.data.success) {
           return wx.showToast({
@@ -85,17 +91,10 @@ Page({
           icon: 'none'
         })
 
-        if (this.data.liked) {
-          this.setData({
-            liked: false,
-            likedCount: this.data.likedCount - 1
-          })
-        } else {
-          this.setData({
-            liked: true,
-            likedCount: this.data.likedCount + 1
-          })
-        }
+        this.setData({
+          liked: !this.data.liked,
+          likedCount: this.data.liked ? this.data.likedCount - 1 : this.data.likedCount + 1
+        })
       },
       fail: err => {
         console.log(err)

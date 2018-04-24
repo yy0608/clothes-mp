@@ -6,10 +6,15 @@
 <view class="text-cont">
   <view class="title">{{goodsDetail.title}}</view>
   <view class="shop-name">{{goodsDetail.shop_id.name}}</view>
+  <view class="shop-name">{{goodsDetail.shop_id.address}}</view>
   <view class="valuation">{{goodsDetail.valuation / 100}}元，具体以店内为准</view>
+  <view class="handle-btns">
+    <button bindtap="collectGoods">{{collected ? '已收藏' : '收藏商品'}}</button>
+    <button bindtap="concernShop">{{concerned ? '已关注' : '关注店铺'}}</button>
+  </view>
 </view>
 <view class="detail-cont">
-  <view class="img-cont" wx:for="{{goodsDetail.detail_imgs}}" wx:key="{{index}}">
+  <view class="img-cont" wx:for="{{goodsDetail.detail_imgs}}" wx:key="{{index}}" data-index="{{index}}" bindtap="previewDetail">
     <image src="{{imgOrigin + item}}" mode="widthFix"></image>
   </view>
 </view>

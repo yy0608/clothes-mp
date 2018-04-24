@@ -24,3 +24,10 @@ swiper {
 .img-cont image {
   width: 100%;
 }
+.handle-btns {
+  display: flex;
+  padding: 30rpx 0;
+}
+.handle-btns button {
+  width: 40%;
+}

@@ -1,16 +1,16 @@
 {
   "pages":[
     "pages/mine/index/index",
-    "pages/topics/comment/comment",
     "pages/shops/index/index",
+    "pages/goods/detail/detail",
+    "pages/topics/detail/detail",
+    "pages/topics/comment/comment",
     "pages/categories/index/index",
     "pages/topics/index/index",
     "pages/topics/collected/collected",
-    "pages/goods/detail/detail",
     "pages/goods/index/index",
     "pages/topics/add/add",
     "pages/test/multi-upload",
-    "pages/topics/detail/detail",
     "pages/entrance/index/index",
     "pages/index/index"
   ],

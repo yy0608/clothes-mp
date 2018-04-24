@@ -15,14 +15,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let shopId = options.shop_id // || '5aab848fb07552196c2da73b'
+    this.myData.shop_id = options.shop_id // || '5aab848fb07552196c2da73b'
     let categoryId = options.category_id
 
     wx.request({
       url: origin + '/user/goods_list',
       method: 'get',
       data: utils.filterEmptyValue({
-        shop_id: shopId,
+        shop_id: this.myData.shop_id,
         category_id: categoryId
       }),
       success: res => {
@@ -53,7 +53,7 @@ Page({
     let _id = e.currentTarget.dataset._id
 
     wx.navigateTo({
-      url: '/pages/goods/detail/detail?_id=' + _id
+      url: '/pages/goods/detail/detail?goods_id=' + _id + '&shop_id=' + this.myData.shop_id
     })
   }
 })
