@@ -64,5 +64,9 @@ Page({
     wx.navigateTo({
       url: '/pages/topics/collected/collected?user_id' + this.data.userData._id
     })
-  }
+  },
+
+  merchant () {},
+
+  feedback () {}
 })

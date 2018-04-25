@@ -1,5 +1,5 @@
 <import src="/templates/toast.wxml" />
-<template is="toast" data="{{...toastData}}" /> 
+<template is="toast" data="{{...toastData}}" />
 
 <view class="sign-title">
   <view class="{{curSign === 'signup' ? 'title-item cur' : 'title-item'}}" bindtap="toggleSign" data-name="signup">注册</view>
@@ -8,36 +8,46 @@
 
 <view class="sign-cont">
   <!-- 注册部分 -->
-  <form bindsubmit="signupSubmit" wx:if="{{curSign === 'signup'}}" class="sign-cont-item signup-cont">
-    <label class="cont-item">
-      <text>手机号：</text>
-      <input name="username" type="number" bindinput="signupUsernameInput" bindblur="signupUsernameBlur"></input>
-    </label>
-    <label class="cont-item" for="captcha">
-      <text>验证码：</text>
-      <input id="captcha" name="captcha" disabled="{{sendCodeDisabled}}"></input>
-      <button class="send-code" bindtap="sendCode" disabled="{{sendCodeDisabled}}">发送</button>
-    </label>
-    <label class="cont-item">
-      <text>密码：</text>
-      <input name="password" type="password"></input>
-    </label>
-    <view class="cont-item">
-      <button formType="submit">注册</button>
+  <form bindsubmit="signupSubmit" wx:if="{{curSign === 'signup'}}">
+    <view class="sign-cont-item signup-cont">
+      <view class="input-cont">
+        <label class="cont-item">
+          <text>手机号：</text>
+          <input name="username" type="number" bindinput="signupUsernameInput" bindblur="signupUsernameBlur"></input>
+        </label>
+        <label class="cont-item" for="captcha">
+          <text>验证码：</text>
+          <!-- <input id="captcha" name="captcha" disabled="{{sendCodeDisabled}}"></input> -->
+          <input id="captcha" type="number" name="captcha"></input>
+          <!-- <button class="send-code" bindtap="sendCode" disabled="{{sendCodeDisabled}}">发送</button> -->
+          <button class="send-code" bindtap="sendCode" disabled="{{countDown}}">{{countDown ? countDown + 's' : '发送'}}</button>
+        </label>
+        <label class="cont-item">
+          <text>密码：</text>
+          <input name="password" type="password"></input>
+        </label>
+      </view>
+      <view class="cont-item">
+        <button formType="submit">注册</button>
+      </view>
     </view>
   </form>
   <!-- 登录部分 -->
-  <form bindsubmit="signinSubmit" wx:if="{{curSign === 'signin'}}" class="sign-cont-item signin-cont">
-    <label class="cont-item">
-      <text>手机号：</text>
-      <input name="username" type="number"></input>
-    </label>
-    <label class="cont-item">
-      <text>密码：</text>
-      <input name="password" type="password"></input>
-    </label>
-    <view class="cont-item">
-      <button formType="submit">登录</button>
+  <form bindsubmit="signinSubmit" wx:if="{{curSign === 'signin'}}">
+    <view class="sign-cont-item">
+      <view class="input-cont">
+        <label class="cont-item">
+          <text>手机号：</text>
+          <input name="username" type="number"></input>
+        </label>
+        <label class="cont-item">
+          <text>密码：</text>
+          <input name="password" type="password"></input>
+        </label>
+      </view>
+      <view class="cont-item">
+        <button formType="submit">登录</button>
+      </view>
     </view>
   </form>
 </view>

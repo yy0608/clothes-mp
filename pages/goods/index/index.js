@@ -15,6 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.myData = {}
     this.myData.shop_id = options.shop_id // || '5aab848fb07552196c2da73b'
     let categoryId = options.category_id
 

@@ -17,7 +17,13 @@ page {
   color: blue;
 }
 .sign-cont-item {
+  display: flex;
+  flex-direction: column;
+  height: 600rpx;
   padding: 30rpx;
+}
+.input-cont {
+  flex-grow: 1;
 }
 .cont-item {
   display: flex;

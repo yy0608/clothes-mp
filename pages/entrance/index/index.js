@@ -45,7 +45,50 @@ Page({
   },
 
   sendCode(e) {
-    console.log(this.myData.signupUsername)
+    if (!(/^1[34578]\d{9}$/.test(this.myData.signupUsername))) {
+      return wx.showToast({
+        title: '请先输入正确的手机号',
+        icon: 'none'
+      })
+    }
+
+    wx.request({
+      url: origin + '/user/register_sms',
+      method: 'post',
+      data: {
+        phone: this.myData.signupUsername
+      },
+      complete: res => {
+        if (res.statusCode === 200) {
+          if (!res.data.success) {
+            return wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+          }
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+
+          this.setData({ countDown: 9 })
+          this.myData.timer = setInterval(() => {
+            if (!this.data.countDown) {
+              clearInterval(this.myData.timer)
+            } else {
+              this.setData({
+                countDown: this.data.countDown - 1
+              })
+            }
+          }, 1000)
+        } else {
+          wx.showToast({
+            title: '请求出错',
+            icon: 'none'
+          })
+        }
+      }
+    })
   },
 
   signupSubmit(e) {
@@ -85,7 +128,8 @@ Page({
 
     let data = {
       username,
-      password
+      password,
+      code: captcha
     }
 
     wx.getUserInfo({ // 获取用户信息

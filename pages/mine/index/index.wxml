@@ -8,6 +8,8 @@
   <view class="handle-cont">
     <view class="handle-item" bindtap="goCollectedShops">关注的店铺</view>
     <view class="handle-item" bindtap="goCollectedTopics">收藏的帖子</view>
+    <view class="handle-item" bindtap="merchant">商家入驻</view>
+    <view class="handle-item" bindtap="feedback">产品反馈</view>
   </view>
   <view class="logout">
     <button bindtap="logout">退出登录</button>

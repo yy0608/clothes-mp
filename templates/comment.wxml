@@ -24,7 +24,7 @@
           <view class="nickname">{{author_id.nickname || author_id.username}}</view>
           <view class="time">{{m3.getDateDis(createdAt)}}</view>
         </view>
-        <view class="like">点赞 {{like_count}}</view>
+        <view class="like" bindtap="like" data-_id="{{_id}}">点赞 {{liked_users.length}}</view>
       </view>
       <view class="comment">{{comment}}</view>
     </view>

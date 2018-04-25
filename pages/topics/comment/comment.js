@@ -47,7 +47,7 @@ Page({
     })
   },
 
-  commentBlur (e) {
+  commentInput (e) {
     this.myData.comment = e.detail.value
   },
 
@@ -71,6 +71,39 @@ Page({
           title: '请求出错',
           icon: 'none'
         })
+      }
+    })
+  },
+
+  like (e) {
+    let _id = e.currentTarget.dataset._id
+    console.log(_id)
+    wx.request({
+      url: origin + '/user/comment_like',
+      method: 'post',
+      data: {
+        user_id: this.myData.author_id,
+        comment_id: _id
+      },
+      complete: res => {
+        if (res.statusCode === 200) {
+          if (!res.data.success) {
+            return wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+          }
+
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        } else {
+          wx.showToast({
+            title: '请求出错',
+            icon: 'none'
+          })
+        }
       }
     })
   }
