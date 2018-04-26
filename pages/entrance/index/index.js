@@ -53,8 +53,10 @@ Page({
     }
 
     wx.request({
-      url: origin + '/user/register_sms',
-      method: 'post',
+      // url: origin + '/user/register_sms',
+      // method: 'post',
+      url: origin + '/user/send_sms',
+      method: 'get',
       data: {
         phone: this.myData.signupUsername
       },
